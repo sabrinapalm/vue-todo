@@ -1,6 +1,11 @@
 <template>
     <header class="header">
-        <h1>Todo</h1>
+        <img
+            class="profile-image"
+            src="https://sabrinapalm.github.io/images/profile-image-secondary.PNG"
+            alt="profile"
+        />
+        <h1>My todo</h1>
     </header>
 </template>
 
@@ -13,7 +18,7 @@ export default {
 
 <style scoped>
 .header {
-    background: #333;
+    background: #64b2cd;
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -22,5 +27,11 @@ export default {
 .header a {
     color: #fff;
     padding-right: 5px;
+}
+
+.profile-image {
+    width: 80px;
+    border: 2px solid #fff;
+    border-radius: 100px;
 }
 </style>

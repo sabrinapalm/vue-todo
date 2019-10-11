@@ -48,7 +48,7 @@ input[type="text"] {
 }
 
 input[type="submit"] {
- flex: 2;
+ flex: 1;
  outline: none;
  font-size: 13px;
 }
