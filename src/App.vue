@@ -11,6 +11,7 @@ import Header from './components/layout/Header'
 import Todos from './components/Todos'
 import AddTodo from './components/AddTodo'
 import axios from 'axios';
+import { log } from 'util';
 
 export default {
     name: 'app',
@@ -34,19 +35,17 @@ export default {
         addTodo(newTodo) {
             let url = 'https://jsonplaceholder.typicode.com/todos';
             const { title, completed } = newTodo;
-            axios.post(url, {
-                title,
-                completed
-            })
+            axios.post(url, { title, completed })
             .then(res => this.todos = [...this.todos, res.data])
             .catch(err => console.log(err));
         }
     },
     created() {
         let url = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
-
         axios.get(url)
-        .then(res => this.todos = res.data)
+        .then(res => {
+         this.todos = res.data
+        })
         .catch(err => console.log('error'))
     }
 }

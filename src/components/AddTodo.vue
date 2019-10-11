@@ -2,7 +2,7 @@
  <div>
   <form @submit="addTodo">
    <input type="text" v-model="title" name="title" placeholder="Add todo..">
-   <input type="submit" name="Submit" class="btn">
+   <input type="submit" name="Submit" class="btn" value="Add">
   </form>
  </div>
 </template>
@@ -23,9 +23,12 @@ export default {
     title: this.title,
     completed: false
    }
-   //Send to parent
-   this.$emit('add-todo', newTodo);
-   this.title = '';
+   if(newTodo.title) {
+    this.$emit('add-todo', newTodo);
+    this.title = '';
+   } else {
+    console.log('input field is empty..');   
+   }
   }
  }
 }
@@ -40,10 +43,14 @@ form {
 input[type="text"] {
  flex: 10;
  padding: 5px;
+ font-size: 14px;
+ outline: none;
 }
 
 input[type="submit"] {
  flex: 2;
+ outline: none;
+ font-size: 13px;
 }
 
 </style>
