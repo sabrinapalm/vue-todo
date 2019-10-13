@@ -1,21 +1,27 @@
 <template>
-    <div class="todo-item" v-bind:class="{'is-complete':todo.completed}">
-        <p class="title">
-            <input type="checkbox" v-model="todo.completed" v-bind:id="todo.id" v-on:change="markComplete" />
-            <label v-bind:for="todo.id"><span></span></label>
+    <div class="todo-item">
+        <p class="title" v-bind:class="{'is-complete':todo.completed}">
+            <input type="checkbox" v-model="todo.completed" v-bind:id="todo._id" v-on:change="markComplete(todo._id, todo.completed)"/>
+            <label v-bind:for="todo._id"><span></span></label>
              {{todo.title}}
-            <button @click="$emit('del-todo', todo.id)" class="del">🗑️</button>
+            <button @click="$emit('del-todo', todo._id)" class="del">🗑️</button>
         </p>
+        <span class="date-time">{{(new Date(todo.date).toISOString().substring(0, 10))}}</span>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'TodoItem',
     props: ['todo'],
     methods: {
-        markComplete() {
-         // this.todo.completed = !this.todo.completed
+        markComplete(_id, completed) {
+            let url = `http://localhost:3000/todos/${_id}`;
+            axios.patch(url, { completed })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
         }
     }
 }
@@ -30,6 +36,11 @@ export default {
 .is-complete {
     text-decoration: line-through;
 }
+
+.date-time {
+    font-size: 11px;
+    color: #9a9a9a;
+}
 .del {
     background-color: transparent;
     color: #fff;
@@ -43,6 +54,7 @@ export default {
 
 .title {
  font-size: 14px;
+ color: #34373d;
 }
 
 input[type="checkbox"] {
@@ -59,11 +71,11 @@ input[type="checkbox"] + label span {
     height:19px;
     margin:-2px 10px 0 0;
     vertical-align:middle;
-    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    background:url(../assets/check_radio_sheet.png) left top no-repeat;
     cursor:pointer;
 }
 
 input[type="checkbox"]:checked + label span {
-    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+    background:url(../assets/check_radio_sheet.png) -19px top no-repeat;
 }
 </style>

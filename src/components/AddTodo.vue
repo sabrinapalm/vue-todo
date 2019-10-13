@@ -2,31 +2,37 @@
  <div>
   <form @submit="addTodo">
    <input type="text" v-model="title" name="title" placeholder="Add todo..">
-   <input type="submit" name="Submit" class="btn" value="Add">
+   <button type="submit" name="Submit">
+    <img src="../assets/plus.svg"/>
+   </button>
   </form>
  </div>
 </template>
 
 <script>
-// import uuid from 'uuid';
 export default {
  name: "AddTodo",
  data() {
   return {
-   title: ''
+   title: '',
+   completed: false,
+   date: Date()
   }
  },
  methods: {
   addTodo(e) {
    e.preventDefault();
+
    const newTodo = {
     title: this.title,
-    completed: false
+    completed: false,
+    date: Date()
    }
+   
    if(newTodo.title) {
     this.$emit('add-todo', newTodo);
     this.title = '';
-   } else {
+    } else {
     console.log('input field is empty..');   
    }
   }
@@ -42,15 +48,35 @@ form {
 
 input[type="text"] {
  flex: 10;
- padding: 5px;
+ padding: 10px;
  font-size: 14px;
  outline: none;
+ border:none;
 }
 
-input[type="submit"] {
- flex: 1;
- outline: none;
- font-size: 13px;
+input[type="text"]:focus {
+    outline:none;
 }
+
+
+
+button[type="submit"] {
+ background-color: transparent;
+ -webkit-box-flex: 1;
+ padding: 7px;
+ width: 41px;
+ outline: none;
+ border:none;
+}
+
+button[type="submit"]:focus {
+ outline:0;
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+
 
 </style>

@@ -2,10 +2,10 @@
     <header class="header">
         <img
             class="profile-image"
-            src="https://sabrinapalm.github.io/images/profile-image-secondary.PNG"
+            src="../../assets/empty-user.png"
             alt="profile"
         />
-        <h1>My todo</h1>
+        <h1>Tasks</h1>
     </header>
 </template>
 
@@ -18,10 +18,14 @@ export default {
 
 <style scoped>
 .header {
-    background: #64b2cd;
+    background: #79589F;
+    background-image: url('../../assets/header-background.png');
+    display: flex;
+    align-items: center;
     color: #fff;
     text-align: center;
     padding: 10px;
+    font-size: 12px;
 }
 
 .header a {
@@ -29,9 +33,12 @@ export default {
     padding-right: 5px;
 }
 
+.header h1 {
+    margin-left: 10px;
+}
+
 .profile-image {
-    width: 80px;
-    border: 2px solid #fff;
+    width: 50px;
     border-radius: 100px;
 }
 </style>

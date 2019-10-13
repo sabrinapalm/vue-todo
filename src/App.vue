@@ -11,7 +11,6 @@ import Header from './components/layout/Header'
 import Todos from './components/Todos'
 import AddTodo from './components/AddTodo'
 import axios from 'axios';
-import { log } from 'util';
 
 export default {
     name: 'app',
@@ -26,27 +25,25 @@ export default {
         }
     },
     methods: {
-        deleteTodo(id) {
-            let url = `https://jsonplaceholder.typicode.com/todos/${id}`;
+        deleteTodo(_id) {
+            let url = `http://localhost:3000/todos/${_id}`;
             axios.delete(url)
-            .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+            .then(res => this.todos = this.todos.filter(todo => todo._id !== _id))
             .catch(err => console.log(err))
         },
         addTodo(newTodo) {
-            let url = 'https://jsonplaceholder.typicode.com/todos';
-            const { title, completed } = newTodo;
-            axios.post(url, { title, completed })
+            let url = 'http://localhost:3000/todos';
+            axios.post(url, newTodo)
             .then(res => this.todos = [...this.todos, res.data])
             .catch(err => console.log(err));
         }
     },
     created() {
-        let url = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
-        axios.get(url)
-        .then(res => {
+        let url = 'http://localhost:3000/todos';
+        axios.get(url).then(res => {
          this.todos = res.data
         })
-        .catch(err => console.log('error'))
+        .catch(err => console.log(err));
     }
 }
 </script>
@@ -63,16 +60,14 @@ body {
     line-height: 1.4;
 }
 
+input, textarea, select, a { outline: none;  }
+
 .btn {
     display: inline-block;
     border: none;
-    background: #555;
+    background: transparent;
     color: #fff;
     padding: 7px 20px;
     cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #666;
 }
 </style>
