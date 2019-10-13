@@ -18,7 +18,7 @@ export default {
     props: ['todo'],
     methods: {
         markComplete(_id, completed) {
-            let url = `http://localhost:3000/todos/${_id}`;
+            let url = `https://vue-todo-api.herokuapp.com/todos/${_id}`;
             axios.patch(url, { completed })
             .then(res => console.log(res))
             .catch(err => console.log(err))
@@ -45,7 +45,7 @@ export default {
     background-color: transparent;
     color: #fff;
     border: none;
-    padding: 5px 9px;
+    padding: 5px 2px;
     border-radius: 50%;
     cursor: pointer;
     float: right;

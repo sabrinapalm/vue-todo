@@ -12,6 +12,7 @@ import Todos from './components/Todos'
 import AddTodo from './components/AddTodo'
 import axios from 'axios';
 
+
 export default {
     name: 'app',
     components: {
@@ -26,20 +27,20 @@ export default {
     },
     methods: {
         deleteTodo(_id) {
-            let url = `http://localhost:3000/todos/${_id}`;
+            let url = `https://vue-todo-api.herokuapp.com/todos/${_id}`;
             axios.delete(url)
             .then(res => this.todos = this.todos.filter(todo => todo._id !== _id))
             .catch(err => console.log(err))
         },
         addTodo(newTodo) {
-            let url = 'http://localhost:3000/todos';
+            let url = 'https://vue-todo-api.herokuapp.com/todos';
             axios.post(url, newTodo)
             .then(res => this.todos = [...this.todos, res.data])
             .catch(err => console.log(err));
         }
     },
     created() {
-        let url = 'http://localhost:3000/todos';
+        let url = 'https://vue-todo-api.herokuapp.com/todos';
         axios.get(url).then(res => {
          this.todos = res.data
         })
