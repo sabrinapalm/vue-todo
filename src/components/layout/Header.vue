@@ -18,8 +18,7 @@ export default {
 
 <style scoped>
 .header {
-    background: #79589F;
-    background-image: url('../../assets/header-background.png');
+    background: #4c278a;
     display: flex;
     align-items: center;
     color: #fff;
